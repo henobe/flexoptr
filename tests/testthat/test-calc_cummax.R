@@ -1,0 +1,20 @@
+context("Generate maximal charge constraints")
+
+test_that("result has same length as cycle", {
+  expect_vector(calc_cummax(1, 5, 20, 1, 2), numeric(0), 1)
+  expect_vector(calc_cummax(10, 5, 20, 1, 2), numeric(0), 10)
+  expect_vector(calc_cummax(100, 5, 20, 1, 2), numeric(0), 100)
+})
+
+test_that("Standard values are handled correctly", {
+  expect_equal(calc_cummax(5, 9, 10, 2, 4), c(3, 5, 7, 9, 11))
+  expect_equal(calc_cummax(20, 5, 20, 1, 4),
+               c(20, 20, 20, 20, 20, 21, 22, 23, 24, 25,
+                 26, 27, 28, 29, 30, 31, 32, 33, 34, 35))
+  expect_equal(calc_cummax(10, 5, 10, 3, 4),
+               c(20, 20, 20, 20, 20, 23, 26, 29, 32, 35))
+})
+
+test_that("No maximum reached is handled correctly", {
+  expect_equal(calc_cummax(4, 5, 10, 3, 4), c(20, 20, 20, 20))
+})
