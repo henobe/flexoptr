@@ -1,5 +1,3 @@
-context("Filter available cycles in constraints")
-
 test_that("Function caps at first cummin > 0", {
   expect_equal(filter_available_cycles(build_constraints(10, 11, 20, 1, 6))$cummin,
                rep(0, 10))

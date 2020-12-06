@@ -1,5 +1,3 @@
-context("Change constraints on charging decision")
-
 std_df <- data.frame(cummin = c(0, 0, 1, 2, 3),
                      cummax = c(10, 10, 10, 10, 10),
                      dirmax = c(2, 2, 2, 2, 2))
@@ -34,6 +32,6 @@ test_that("Cummin values are reduced by one until zero", {
   expect_equal(changed_df$cummin, c(0, 0, 0, 0, 0))
 })
 
-test_that("Index out of range throws error", {
+test_that("Throws error when charged outside index range", {
   expect_error(adapt_constraints(std_df, 9))
 })
