@@ -1,11 +1,13 @@
 Package: flexoptr
 Type: Package
 Title: Optimise Energy Flexibilities
-Version: 0.1.0
+Version: 0.2
 Author: Hendrik Obelöer
 Maintainer: <hendrik.obeloeer@haw-hamburg.de>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: A suite of functions to generalise and ease the modelling of 
+    energy flexibilities. By defining base paramters, the needs of a
+    constrained flexiblity are calculated, and optimised over price data.
+    Further analysis, including balancing costs, is facilitated.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

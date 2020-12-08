@@ -4,7 +4,14 @@
 \alias{build_constraints}
 \title{Calculates the cumulative minimum and maximum charge for a storage}
 \usage{
-build_constraints(cycles, state, capacity, loss_rate, charge_rate)
+build_constraints(
+  cycles,
+  state,
+  capacity,
+  loss_rate,
+  charge_rate,
+  base_parameters = NULL
+)
 }
 \arguments{
 \item{cycles}{a positive integer, the number of cycles this function should consider}
@@ -16,6 +23,9 @@ build_constraints(cycles, state, capacity, loss_rate, charge_rate)
 \item{loss_rate}{a positive integer, the energy / cycle depleted from storage}
 
 \item{charge_rate}{a positive integer, the maximum energy / cycle which with the storage can be charged}
+
+\item{base_parameters}{a numerical vector, the elements must at least
+include capacity, loss_rate and charge_rate coded as names}
 }
 \value{
 a data frame with cycle number, minimum, and maximum cumulative charge

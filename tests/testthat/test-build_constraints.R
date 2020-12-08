@@ -26,15 +26,30 @@ test_that("Cummin has same length as cycle", {
 })
 
 test_that("Standard cummin values are handled correctly", {
+  expect_equal(calc_cummin(3, 3, 2), c(0, 1, 3))
+  expect_equal(calc_cummin(3, 5, 2), c(0, 0, 1))
+})
+
+test_that("Cummin above zero is handled correctly", {
   expect_equal(calc_cummin(4, 5, 1), rep(0, 4))
   expect_equal(calc_cummin(4, 15, 3), rep(0, 4))
   expect_equal(calc_cummin(20, 21, 1), rep(0, 20))
 })
 
-test_that("Cummin above zero is handled correctly", {
-  expect_equal(calc_cummin(4, 5, 1), rep(0, 4))
-})
-
 test_that("Immediate below zero for cummin is handled correctly", {
   expect_equal(calc_cummin(3, 2, 3), c(1, 4, 7))
+  expect_equal(calc_cummin(3, 0, 3), c(3, 6, 9))
+})
+
+# build_constraints -------------------
+test_that("Error when not all base parameters are present", {
+  expect_error(build_constraints(5, 10, capacity = 20, loss_rate = 2))
+  expect_error(build_constraints(5, 10, loss_rate = 2, charge_rate = 4))
+  expect_error(build_constraints(5, 10, capacity = 20, charge_rate = 4))
+
+  my_parameters <- c("capacity" = 20, "loss_rate" = 2, charge_rate = 4)
+
+  expect_error(build_constraints(5, 10, base_parameters = my_parameters[c(1, 2)]))
+  expect_error(build_constraints(5, 10, base_parameters = my_parameters[c(2, 3)]))
+  expect_error(build_constraints(5, 10, base_parameters = my_parameters[c(1, 3)]))
 })

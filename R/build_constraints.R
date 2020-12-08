@@ -9,12 +9,16 @@ calc_cummin <- function(cycles, state, loss_rate){
   cycles_until_empty <- state / loss_rate
 
   if(floor(cycles_until_empty) < cycles) {
-    overshoot <- ceiling(cycles_until_empty) * loss_rate - state
+    if(state == 0){
+      return(cumsum(rep(loss_rate, cycles)))
+    } else {
+      overshoot <- ceiling(cycles_until_empty) * loss_rate - state
 
-    c(rep(0, ceiling(cycles_until_empty) - 1),
-      overshoot,
-      overshoot + cumsum(rep(loss_rate,
-                             cycles - (ceiling(cycles_until_empty)))))
+      return(c(rep(0, ceiling(cycles_until_empty) - 1),
+               overshoot,
+               overshoot + cumsum(rep(loss_rate,
+                                      cycles - (ceiling(cycles_until_empty))))))
+    }
   } else {
     rep(0, cycles)
   }
@@ -69,14 +73,27 @@ calc_cummax <- function(cycles, state, capacity, loss_rate, charge_rate){
 #' @param capacity a positive integer, the maximum amount of energy that can be stored
 #' @param loss_rate a positive integer, the energy / cycle depleted from storage
 #' @param charge_rate a positive integer, the maximum energy / cycle which with the storage can be charged
+#' @param base_parameters a numerical vector, the elements must at least
+#' include capacity, loss_rate and charge_rate coded as names
 #'
 #' @return a data frame with cycle number, minimum, and maximum cumulative charge
 #' @export
 #'
 #' @examples
 #' build_constraints(10, 5, 20, 2, 4)
-build_constraints <- function(cycles, state, capacity,
-                                  loss_rate, charge_rate){
+build_constraints <- function(cycles, state, capacity, loss_rate,
+                              charge_rate, base_parameters = NULL){
+  if(!is.null(base_parameters)){
+    capacity <- unname(base_parameters["capacity"])
+    loss_rate <- unname(base_parameters["loss_rate"])
+    charge_rate <- unname(base_parameters["charge_rate"])
+
+    if(any(any(sapply(c(capacity, loss_rate, charge_rate), is.na)))){
+      stop("Argument base_parameters was used, but the vector did not include
+           all necessary elements (capacity, loss_rate, charge_rate).")
+    }
+  }
+
   data.frame(
     "cummin" = calc_cummin(cycles, state, loss_rate),
     "cummax" = calc_cummax(cycles, state, capacity, loss_rate, charge_rate),

@@ -2,30 +2,51 @@
 % Please edit documentation in R/optimise_schedule.R
 \name{optimise_schedule}
 \alias{optimise_schedule}
-\title{Optimise a constrained schedule over price data}
+\title{Optimise a schedule}
 \usage{
-optimise_schedule(constraints, prices, volume)
+optimise_schedule(current_schedule, change_in_schedule, constraints, prices)
 }
 \arguments{
+\item{current_schedule}{a vector of integers, must have same length as rows
+of \code{constraints}}
+
+\item{change_in_schedule}{an integer, indicates the difference to the
+the sum of \code{current_schedule}}
+
 \item{constraints}{a data frame with constraints, i.e. columns, for a
 cumulative minimum, \code{cummin}, a cumulative maximum \code{cummax}
-and a direct maximum charge \code{dirmax}. These}
+and a direct maximum charge \code{dirmax}.}
 
 \item{prices}{a vector of numeric prices, must have same length as rows
 of constraints.}
-
-\item{volume}{a positive integer, sets the number of units of energy that
-should be distributed over the possible times.}
 }
 \value{
-A vector of integers
+a list with a numerical vector for the schedule and
+a data frame describing the trades. If no trades happened,
+then the data frame has zero rows
 }
 \description{
-The order of the data frame and the price data is assumed to represent
-the time hierarchy.
+Checks input parameters and then returns an optimised schedule
+and the necessary trades.
 }
 \examples{
-sample_constraints <- build_constraints(10, 5, 20, 2, 4)
-sample_prices <- sample.int(50, 10, replace = TRUE)
-optimise_schedule(sample_constraints, sample_prices, 15)
+my_schedule <- rep(0, 4)
+my_constraints <- build_constraints(4, 8, 20, 3, 4)
+some_prices <- c(4, 6, 10, 3)
+optimisation_result <- optimise_schedule(
+  current_schedule = my_schedule,
+  change_in_schedule = 12,
+  constraints = my_constraints,
+  prices = some_prices)
+
+# can also re-optimise with new prices
+new_prices <- c(5, 2, 1, 8)
+new_result <- optimise_schedule(
+  current_schedule = optimisation_result$schedule,
+  change_in_schedule = 0,
+  constraints = my_constraints,
+  prices = new_prices)
+}
+\seealso{
+\code{\link{build_constraints}}
 }
