@@ -1,7 +1,7 @@
 Package: flexoptr
 Type: Package
 Title: Optimise Energy Flexibilities
-Version: 0.2
+Version: 0.3
 Author: Hendrik Obelöer
 Maintainer: <hendrik.obeloeer@haw-hamburg.de>
 Description: A suite of functions to generalise and ease the modelling of 
@@ -14,3 +14,5 @@ LazyData: true
 RoxygenNote: 7.1.1
 Suggests: 
     testthat
+Imports: 
+    magrittr

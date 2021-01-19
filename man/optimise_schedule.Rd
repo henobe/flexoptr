@@ -2,50 +2,32 @@
 % Please edit documentation in R/optimise_schedule.R
 \name{optimise_schedule}
 \alias{optimise_schedule}
-\title{Optimise a schedule}
+\title{Optimise a schedule with an iterating approach}
 \usage{
-optimise_schedule(current_schedule, change_in_schedule, constraints, prices)
+optimise_schedule(schedule, prices, parameters, shift, blocked = NULL)
 }
 \arguments{
-\item{current_schedule}{a vector of integers, must have same length as rows
-of \code{constraints}}
+\item{schedule}{a numeric vector of the current schedule.}
 
-\item{change_in_schedule}{an integer, indicates the difference to the
-the sum of \code{current_schedule}}
+\item{prices}{a list of available prices. how NULLs are interpreted in List,
+how NAs are interpreted in the elements of the list.}
 
-\item{constraints}{a data frame with constraints, i.e. columns, for a
-cumulative minimum, \code{cummin}, a cumulative maximum \code{cummax}
-and a direct maximum charge \code{dirmax}.}
+\item{parameters}{a named vector, including values for charge_rate, loss_rate,
+starting_state, and capacity.}
 
-\item{prices}{a vector of numeric prices, must have same length as rows
-of constraints.}
+\item{shift}{an integer, indicates the difference to the
+the sum of the \code{current_schedule} that is added or subtracted each iteration.}
+
+\item{blocked}{a numeric vector, sane length as \code{schedule},
+that blocks amounts that are not optimised but considered when calculating
+the needs of the storage.}
 }
 \value{
-a list with a numerical vector for the schedule and
-a data frame describing the trades. If no trades happened,
-then the data frame has zero rows
+A list with three elements, an optimised schedule, the states of the
+storage according to that new schedule and a data frame of corresponding trades.
 }
 \description{
-Checks input parameters and then returns an optimised schedule
-and the necessary trades.
-}
-\examples{
-my_schedule <- rep(0, 4)
-my_constraints <- build_constraints(4, 8, 20, 3, 4)
-some_prices <- c(4, 6, 10, 3)
-optimisation_result <- optimise_schedule(
-  current_schedule = my_schedule,
-  change_in_schedule = 12,
-  constraints = my_constraints,
-  prices = some_prices)
-
-# can also re-optimise with new prices
-new_prices <- c(5, 2, 1, 8)
-new_result <- optimise_schedule(
-  current_schedule = optimisation_result$schedule,
-  change_in_schedule = 0,
-  constraints = my_constraints,
-  prices = new_prices)
+Optimise a schedule with an iterating approach
 }
 \seealso{
 \code{\link{build_constraints}}
