@@ -14,11 +14,11 @@ NA-values (or a single), then that hour will not be iterated. When some price
 values inside a list element are NA, this will be interpreted that only
 those hours are not tradeable.}
 
-\item{parameters}{a named vector, including values for charge_rate, loss_rate,
-starting_state, and capacity.}
+\item{parameters}{a named vector of integers, including values for
+charge_rate, loss_rate, starting_state, and capacity.}
 
-\item{shift}{an integer, indicates the difference to the
-the sum of the \code{current_schedule} that is added or subtracted each iteration.}
+\item{shift}{an integer, indicates the difference to the the sum of the
+\code{current_schedule} that is added or subtracted each iteration}
 
 \item{blocked}{a numeric vector, sane length as \code{schedule},
 that blocks amounts that are not optimised but considered when calculating
