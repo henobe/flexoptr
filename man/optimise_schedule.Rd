@@ -9,8 +9,10 @@ optimise_schedule(schedule, prices, parameters, shift, blocked = NULL)
 \arguments{
 \item{schedule}{a numeric vector of the current schedule.}
 
-\item{prices}{a list of available prices. how NULLs are interpreted in List,
-how NAs are interpreted in the elements of the list.}
+\item{prices}{a list of available prices. When an element consists only of
+NA-values (or a single), then that hour will not be iterated. When some price
+values inside a list element are NA, this will be interpreted that only
+those hours are not tradeable.}
 
 \item{parameters}{a named vector, including values for charge_rate, loss_rate,
 starting_state, and capacity.}

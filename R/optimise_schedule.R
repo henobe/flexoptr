@@ -1,8 +1,10 @@
 #' Optimise a schedule with an iterating approach
 #'
 #' @param schedule a numeric vector of the current schedule.
-#' @param prices a list of available prices. how NULLs are interpreted in List,
-#' how NAs are interpreted in the elements of the list.
+#' @param prices a list of available prices. When an element consists only of
+#' NA-values (or a single), then that hour will not be iterated. When some price
+#' values inside a list element are NA, this will be interpreted that only
+#' those hours are not tradeable.
 #' @param parameters a named vector, including values for charge_rate, loss_rate,
 #' starting_state, and capacity.
 #' @param shift an integer, indicates the difference to the
@@ -22,7 +24,7 @@ optimise_schedule <- function(schedule, prices, parameters,
   if(is.null(blocked)) blocked <- rep(0, length(schedule))
   trades <- NULL
 
-  for (i in which(!sapply(prices, is.null))){
+  for (i in identify_non_na_elements(prices)){
     next_prices <- prices[[i]]
     range <- length(next_prices)
     i_end <- i + range - 1
