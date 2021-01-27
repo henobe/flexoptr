@@ -72,9 +72,10 @@ calc_cummax <- function(cycles, state, capacity, loss_rate, charge_rate){
 #' @param state a positive integer, the starting state of energy in the storage
 #' @param capacity a positive integer, the maximum amount of energy that can be stored
 #' @param loss_rate a positive integer, the energy / cycle depleted from storage
-#' @param charge_rate a positive integer, the maximum energy / cycle which with the storage can be charged
-#' @param base_parameters a numerical vector, the elements must at least
-#' include capacity, loss_rate and charge_rate coded as names
+#' @param charge_rate a positive integer, the maximum energy / cycle which with
+#' the storage can be charged
+#' @param parameters a numerical vector, the elements must at least include
+#' capacity, loss_rate and charge_rate coded as names
 #'
 #' @return a data frame with cycle number, minimum, and maximum cumulative charge
 #' @export
@@ -82,13 +83,13 @@ calc_cummax <- function(cycles, state, capacity, loss_rate, charge_rate){
 #' @examples
 #' build_constraints(10, 5, 20, 2, 4)
 build_constraints <- function(cycles, state, capacity, loss_rate,
-                              charge_rate, base_parameters = NULL){
-  if(!is.null(base_parameters)){
-    capacity <- unname(base_parameters["capacity"])
-    loss_rate <- unname(base_parameters["loss_rate"])
-    charge_rate <- unname(base_parameters["charge_rate"])
+                              charge_rate, parameters = NULL){
+  if(!is.null(parameters)){
+    capacity <- unname(parameters["capacity"])
+    loss_rate <- unname(parameters["loss_rate"])
+    charge_rate <- unname(parameters["charge_rate"])
 
-    if(any(any(sapply(c(capacity, loss_rate, charge_rate), is.na)))){
+    if(any(sapply(c(capacity, loss_rate, charge_rate), is.na))){
       stop("Argument base_parameters was used, but the vector did not include
            all necessary elements (capacity, loss_rate, charge_rate).")
     }

@@ -49,7 +49,7 @@ test_that("Error when not all base parameters are present", {
 
   my_parameters <- c("capacity" = 20, "loss_rate" = 2, charge_rate = 4)
 
-  expect_error(build_constraints(5, 10, base_parameters = my_parameters[c(1, 2)]))
-  expect_error(build_constraints(5, 10, base_parameters = my_parameters[c(2, 3)]))
-  expect_error(build_constraints(5, 10, base_parameters = my_parameters[c(1, 3)]))
+  expect_error(build_constraints(5, 10, parameters = my_parameters[c(1, 2)]))
+  expect_error(build_constraints(5, 10, parameters = my_parameters[c(2, 3)]))
+  expect_error(build_constraints(5, 10, parameters = my_parameters[c(1, 3)]))
 })

@@ -24,9 +24,14 @@ optimise_constraints <- function(constraints, prices, volume) {
   if(nrow(constraints) != length(prices)){
     stop("Constrains and prices have different lengths")
   }
+  if(volume > utils::tail(constraints$cummax, n=1) |
+     volume > sum(constraints$dirmax) |
+     volume < 0) {
+    stop("change in schedule requested which exceeds physical limits")
+  }
 
   constraints$prices <- prices
-  constraints$index <- 1:length(prices)
+  constraints$index <- seq_along(prices)
   schedule <- rep(0, length(prices))
 
   while(sum(schedule) < volume){
