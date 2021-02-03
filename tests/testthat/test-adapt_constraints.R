@@ -21,6 +21,15 @@ test_that("Dirmax changes at index", {
   expect_equal(adapt_constraints(std_df, 5)$dirmax, c(2, 2, 2, 2, 1))
 })
 
+test_that("Only receding cummin values are lowered", {
+  changed_df <- adapt_constraints(std_df, 4)
+  expect_equal(changed_df$cummin, c(0, 0, 1, 1, 2))
+  changed_df <- adapt_constraints(changed_df, 5)
+  expect_equal(changed_df$cummin, c(0, 0, 1, 1, 1))
+  changed_df <- adapt_constraints(changed_df, 4)
+  expect_equal(changed_df$cummin, c(0, 0, 1, 0, 0))
+})
+
 test_that("Cummin values are reduced by one until zero", {
   changed_df <- adapt_constraints(std_df, 1)
   expect_equal(changed_df$cummin, c(0, 0, 0, 1, 2))
