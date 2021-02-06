@@ -20,9 +20,9 @@ charge_rate, loss_rate, starting_state, and capacity.}
 \item{shift}{an integer, indicates the difference to the the sum of the
 \code{current_schedule} that is added or subtracted each iteration}
 
-\item{blocked}{a numeric vector, sane length as \code{schedule},
-that blocks amounts that are not optimised but considered when calculating
-the needs of the storage.}
+\item{blocked}{A logical vector indicating whether the schedule for that
+hour should be kept as is and not changed by the optimisation, same length
+as schedule}
 }
 \value{
 A list with three elements, an optimised schedule, the states of the

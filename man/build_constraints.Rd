@@ -2,7 +2,7 @@
 % Please edit documentation in R/build_constraints.R
 \name{build_constraints}
 \alias{build_constraints}
-\title{Calculates the cumulative minimum and maximum charge for a storage}
+\title{Calculate the cumulative minimum and maximum charge for a storage}
 \usage{
 build_constraints(
   cycles,

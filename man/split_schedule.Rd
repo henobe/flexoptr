@@ -26,7 +26,7 @@ of same length.
 }
 \examples{
 my_schedule <- c(0, 0, 3, 2, 3, 4)
-reserved_capacity <- c(0, 0, 2, 2, 0, 0)
+reserved_capacity <- c(TRUE, FALSE, FALSE, FALSE, TRUE, FALSE)
 available_prices <- c(30, 40, 20, NA, NA, 5)
 split_schedule(my_schedule, reserved_capacity, available_prices)
 }

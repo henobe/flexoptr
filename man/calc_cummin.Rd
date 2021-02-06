@@ -2,7 +2,7 @@
 % Please edit documentation in R/build_constraints.R
 \name{calc_cummin}
 \alias{calc_cummin}
-\title{Calculates the cumulative minimum charge}
+\title{Calculate the cumulative minimum charge}
 \usage{
 calc_cummin(cycles, state, loss_rate)
 }
@@ -17,5 +17,5 @@ calc_cummin(cycles, state, loss_rate)
 a vector of integers, with length \code{cycles}.
 }
 \description{
-Calculates the cumulative minimum charge
+Calculate the cumulative minimum charge
 }

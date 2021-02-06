@@ -2,7 +2,7 @@
 % Please edit documentation in R/build_constraints.R
 \name{calc_cummax}
 \alias{calc_cummax}
-\title{Calculates the cumulative maximum charge}
+\title{Calculate the cumulative maximum charge}
 \usage{
 calc_cummax(cycles, state, capacity, loss_rate, charge_rate)
 }
@@ -21,5 +21,5 @@ calc_cummax(cycles, state, capacity, loss_rate, charge_rate)
 a vector of integers, with length \code{cycles}.
 }
 \description{
-Calculates the cumulative maximum charge
+Calculate the cumulative maximum charge
 }

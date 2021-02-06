@@ -9,7 +9,8 @@ simulate_marketing(
   da_prices,
   id_prices,
   id_index_names,
-  blocked_per_day = NULL
+  blocked_per_day = NULL,
+  simplify = FALSE
 )
 }
 \arguments{
@@ -25,6 +26,10 @@ for consecutive hours.}
 
 \item{blocked_per_day}{An optional vector of 24 integers describing which the
 power that is predetermined for certain hours and cannot be optimised.}
+
+\item{simplify}{Whether the output should be a simple data frame
+describing the revenues or a more complex list with the whole trade logs,
+schedule and state}
 }
 \value{
 A list of results for each of the three scenarios

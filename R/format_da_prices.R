@@ -25,7 +25,8 @@ format_da_prices <- function(prices){
 
   reformatted_prices <- as.list(rep(NA, number_of_prices))
     for(i in days){
-    reformatted_prices[[((i-1) * 24 + 1)]] <- wide_prices[[i]]
+      reformatted_prices[[((i-1) * 24 + 1)]] <- wide_prices[[i]]
   }
   reformatted_prices
 }
+

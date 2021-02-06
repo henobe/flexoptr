@@ -3,6 +3,7 @@
 export("%>%")
 export(append_trades)
 export(build_constraints)
+export(calc_revenue)
 export(describe_trades)
 export(format_da_prices)
 export(format_id_prices)

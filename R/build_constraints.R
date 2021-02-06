@@ -1,4 +1,4 @@
-#' Calculates the cumulative minimum charge
+#' Calculate the cumulative minimum charge
 #'
 #' @param cycles a positive integer
 #' @param state a positive integer
@@ -25,7 +25,7 @@ calc_cummin <- function(cycles, state, loss_rate){
 }
 
 
-#' Calculates the cumulative maximum charge
+#' Calculate the cumulative maximum charge
 #'
 #' @param cycles a positive integer
 #' @param state a positive integer
@@ -52,7 +52,7 @@ calc_cummax <- function(cycles, state, capacity, loss_rate, charge_rate){
 }
 
 
-#' Calculates the cumulative minimum and maximum charge for a storage
+#' Calculate the cumulative minimum and maximum charge for a storage
 #'
 #' Given the physical parameters, this function calculates the necessary,
 #' i.e lower limits, and possible, i.e. upper limits, for charging a storage.
@@ -94,7 +94,13 @@ build_constraints <- function(cycles, state, capacity, loss_rate,
            all necessary elements (capacity, loss_rate, charge_rate).")
     }
   }
-
+  if(any(c(cycles, state, capacity, loss_rate, charge_rate) < 0)){
+    ind <- which(c(cycles, state, capacity, loss_rate, charge_rate) < 0)
+    stop(paste("Negative parameter",
+               c("cycles", "state", "capacity", "loss_rate", "charge_rate")[ind],
+               "must be zero or positive."))
+  }
+  
   data.frame(
     "cummin" = calc_cummin(cycles, state, loss_rate),
     "cummax" = calc_cummax(cycles, state, capacity, loss_rate, charge_rate),

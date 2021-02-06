@@ -41,6 +41,7 @@ test_that("Immediate below zero for cummin is handled correctly", {
   expect_equal(calc_cummin(3, 0, 3), c(3, 6, 9))
 })
 
+
 # build_constraints -------------------
 test_that("Error when not all base parameters are present", {
   expect_error(build_constraints(5, 10, capacity = 20, loss_rate = 2))
@@ -52,4 +53,12 @@ test_that("Error when not all base parameters are present", {
   expect_error(build_constraints(5, 10, parameters = my_parameters[c(1, 2)]))
   expect_error(build_constraints(5, 10, parameters = my_parameters[c(2, 3)]))
   expect_error(build_constraints(5, 10, parameters = my_parameters[c(1, 3)]))
+})
+
+
+test_that("Error when any parameter was negative", {
+  expect_error(build_constraints(5, 10, capacity = 20, loss_rate = 2, charge_rate = -4))
+  expect_error(build_constraints(5, 10, capacity = 20, loss_rate = -2, charge_rate = 4))
+  expect_error(build_constraints(5, 10, capacity = -20, loss_rate = 2, charge_rate = 4))
+  expect_error(build_constraints(5, 10, capacity = -20, loss_rate = -2, charge_rate = -4))
 })

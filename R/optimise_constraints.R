@@ -24,12 +24,20 @@ optimise_constraints <- function(constraints, prices, volume) {
   if(nrow(constraints) != length(prices)){
     stop("Constrains and prices have different lengths")
   }
-  if(volume > utils::tail(constraints$cummax, n=1) |
-     volume > sum(constraints$dirmax) |
-     volume < 0) {
-    stop("change in schedule requested which exceeds physical limits")
+  if(volume > utils::tail(constraints$cummax, n=1)) {
+    stop(paste("More cumulative volume requested than can be stored.",
+               "Maximum cummax was", utils::tail(constraints$cummax, n=1),
+               "Volume was", volume))
   }
-
+  if(volume > sum(constraints$dirmax)) {
+    stop(paste("More direct volume requested than can be charged.",
+               "Sum of dirmax was", sum(constraints$dirmax),
+               "Volume was", volume))
+  }
+  if(volume < 0) {
+    stop(paste("Negative volume (", volume, ") requested."))
+  }
+  
   constraints$prices <- prices
   constraints$index <- seq_along(prices)
   schedule <- rep(0, length(prices))

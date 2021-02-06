@@ -1,7 +1,7 @@
 Package: flexoptr
 Type: Package
 Title: Optimise Energy Flexibilities
-Version: 0.3
+Version: 0.5
 Author: Hendrik Obelöer
 Maintainer: <hendrik.obeloeer@haw-hamburg.de>
 Description: A suite of functions to generalise and ease the modelling of 

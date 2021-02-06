@@ -16,21 +16,23 @@
 #'
 #' @examples
 #' my_schedule <- c(0, 0, 3, 2, 3, 4)
-#' reserved_capacity <- c(0, 0, 2, 2, 0, 0)
+#' reserved_capacity <- c(TRUE, FALSE, FALSE, FALSE, TRUE, FALSE)
 #' available_prices <- c(30, 40, 20, NA, NA, 5)
 #' split_schedule(my_schedule, reserved_capacity, available_prices)
 split_schedule <- function(schedule, reservations, available_prices){
-  if(c(length(schedule), length(reservations), length(available_prices)) %>%
-       unique() %>%
-       length() != 1){
+  if(!check_same_length(schedule, reservations, available_prices)){
     stop("Input parameters do not have the same length.")
   }
-  if(!all(reservations <= schedule)){
-    stop("There is more reserved power than available in schedule.")
-  }
-
-  untradeable <- which(is.na(available_prices))
-  reservations[untradeable] <- schedule[untradeable]
-
-  list(fixed = reservations, flexible = schedule - reservations, untradeable = untradeable)
+  
+  untradeable <- available_prices %>%
+    is.na() %>%
+    which() %>%
+    c(which(reservations)) %>%
+    unique() %>%
+    sort()
+  
+  fixed <- rep(0, length(schedule))
+  fixed[untradeable] <- schedule[untradeable]
+  
+  list(fixed = fixed, flexible = schedule - fixed, untradeable = untradeable)
 }
