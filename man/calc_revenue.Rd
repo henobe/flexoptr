@@ -2,16 +2,16 @@
 % Please edit documentation in R/calc_revenue.R
 \name{calc_revenue}
 \alias{calc_revenue}
-\title{Simply calculate overall revenue of a trade data frame}
+\title{Calculate the overall revenue of a trade data frame}
 \usage{
 calc_revenue(trade_df)
 }
 \arguments{
-\item{trade_df}{A data.frame as exported by \code{describe_trades}}
+\item{trade_df}{A data.frame as exported by \code{describe_trades}.}
 }
 \value{
 A single number describing the revenue
 }
 \description{
-Simply calculate overall revenue of a trade data frame
+Calculate the overall revenue of a trade data frame
 }

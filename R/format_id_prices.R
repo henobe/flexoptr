@@ -25,13 +25,15 @@
 #'
 #' @seealso \code{\link{optimise_schedule}}
 #' @examples
-#' some_prices <- data.frame(time = c(1,2,3),
-#'                           id_1 = c(20, 30, 40),
-#'                           id_2 = c(22,28, 39),
-#'                           id_3 = c(25, 27, 41))
+#' some_prices <- data.frame(
+#'   time = c(1, 2, 3),
+#'   id_1 = c(20, 30, 40),
+#'   id_2 = c(22, 28, 39),
+#'   id_3 = c(25, 27, 41)
+#' )
 #' format_id_prices(some_prices, c("id_1", "id_2", "id_3"))
-format_id_prices <- function(pricetable, colnames){
-  set_price_at_time <- function(df, offsets, varname){
+format_id_prices <- function(pricetable, colnames) {
+  set_price_at_time <- function(df, offsets, varname) {
     values <- `[[`(df, varname)
     offset <- offsets$offset[offsets$varnames == varname]
 
@@ -40,8 +42,10 @@ format_id_prices <- function(pricetable, colnames){
   }
 
   offsets <- data.frame(varnames = colnames, offset = seq_along(colnames))
-  values <- lapply(offsets$varnames, FUN = set_price_at_time,
-                   df = pricetable, offsets = offsets)
+  values <- lapply(offsets$varnames, set_price_at_time,
+    df = pricetable,
+    offsets = offsets
+  )
   values <- values %>%
     unlist() %>%
     matrix(nrow = length(values), byrow = TRUE) %>%
@@ -49,7 +53,7 @@ format_id_prices <- function(pricetable, colnames){
 
   values <- cbind(NA, values) %>%
     split(seq(nrow(pricetable)))
-  
+
   names(values) <- NULL
   pricetable$lookout <- values
   pricetable

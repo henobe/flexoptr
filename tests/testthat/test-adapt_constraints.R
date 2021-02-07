@@ -1,14 +1,18 @@
-std_df <- data.frame(cummin = c(0, 0, 1, 2, 3),
-                     cummax = c(10, 10, 10, 10, 10),
-                     dirmax = c(2, 2, 2, 2, 2))
+std_df <- data.frame(
+  cummin = c(0, 0, 1, 2, 3),
+  cummax = c(10, 10, 10, 10, 10),
+  dirmax = c(2, 2, 2, 2, 2)
+)
 
 test_that("Cummax values are handled correctly", {
   changed_df <- adapt_constraints(std_df, 3)
   expect_equal(changed_df$cummax, c(9, 9, 9, 9, 9))
 
-  df <- data.frame(cummin = c(0, 0, 0, 0, 0),
-                   cummax = c(8, 10, 10, 11, 12),
-                   dirmax = c(2, 2, 2, 2, 2))
+  df <- data.frame(
+    cummin = c(0, 0, 0, 0, 0),
+    cummax = c(8, 10, 10, 11, 12),
+    dirmax = c(2, 2, 2, 2, 2)
+  )
   changed_df <- adapt_constraints(df, 3)
   expect_equal(changed_df$cummax, c(8, 9, 9, 10, 11))
 })

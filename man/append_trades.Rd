@@ -7,15 +7,18 @@
 append_trades(new_trades, old_trades, time_offset = 0)
 }
 \arguments{
-\item{new_trades}{a data frame, formatted like the output of \code{describe_trades}}
+\item{new_trades}{a data frame, formatted like the output of
+\code{describe_trades}.}
 
-\item{old_trades}{a data frame, formatted like the output of this function, can be NULL}
+\item{old_trades}{a data frame, formatted like the output of this function,
+can be NULL.}
 
-\item{time_offset}{the index of trades are assumed to be starting at 1,
-the offset is added to this index}
+\item{time_offset}{the index of trades are assumed to be starting at 1, the
+offset is added to this index.}
 }
 \value{
-a data frame
+a data frame, with all values from \code{new_trades} and
+\code{old_trades}
 }
 \description{
 Extend a trade data frame with new trades

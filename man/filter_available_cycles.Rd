@@ -7,18 +7,25 @@
 filter_available_cycles(constraints)
 }
 \arguments{
-\item{constraints}{a data frame with constraints for cumulative minimum,
-\code{cummin}, cumulative maximum \code{cummax},
-a direct maximum charge \code{dirmax}.
+\item{constraints}{a data frame with columns for cumulative minimum,
+\code{cummin}, cumulative maximum \code{cummax}, a direct maximum charge
+\code{dirmax}. The order of the rows is assumed to be strictly chronological
+without time lapses.
 
 The order of the data frame is assumed to represent the time hierarchy.}
 }
 \value{
-a data frame with original row numbers and prices
+the original data with filtered rows.
 }
 \description{
-Select only viable charging times
+A constraints data frame describes the physical limits of a charging process.
+}
+\details{
+The function selects the rows until \code{cummin} column first contains a
+value greater than zero (this row is also selected). Out of this selection
+only the rows with a \code{cummax} and a \code{dirmax} value greater than
+zero are selected.
 }
 \seealso{
-build_cum_constraints
+\code{\link{build_constraints}}
 }

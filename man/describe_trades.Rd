@@ -9,19 +9,21 @@ describe_trades(old_schedule, new_schedule, prices)
 \arguments{
 \item{old_schedule}{a numerical vector}
 
-\item{new_schedule}{a numerical vector, must be same length as
-\code{current_schedule}}
+\item{new_schedule}{a numerical vector, must be same length as \code{current_schedule}.}
 
-\item{prices}{a numerical vector}
+\item{prices}{a numerical vector, must be same length as \code{current_schedule}.}
 }
 \value{
-a data frame with columns for original index, volume and buy/sell price
+a data frame with columns describing the time at which a trade
+occurred (as index of old_schedule), volume and buy/sell price
 }
 \description{
-Generate a trade list base on a previous and a new schedule.
+Generate a trade list based on a previous and a new schedule. The function
+will analyse the differences between the schedules and infer the time and
+volume of the trades that occurred.
 }
 \examples{
-schedule1 <- c(4, 0, 0,  3)
+schedule1 <- c(4, 0, 0, 3)
 schedule2 <- c(0, 3, 0, 4)
 new_prices <- c(70, 65, 80, 60)
 describe_trades(schedule1, schedule2, new_prices)

@@ -7,12 +7,14 @@
 simulate_no_storage(parameters, prices)
 }
 \arguments{
-\item{parameters}{a named vector, which must contain \code{loss_rate} and \code{starting_state}.}
+\item{parameters}{a named vector, which must contain \code{loss_rate} and
+\code{starting_state}.}
 
 \item{prices}{a numeric vector.}
 }
 \value{
-a list of schedule, state, ans trades. Compatible with \code{optimise_schedule}
+a list of schedule, state, ans trades. Compatible with
+\code{optimise_schedule}
 }
 \description{
 Mock the output \code{optimise_schedule} for settings without storage

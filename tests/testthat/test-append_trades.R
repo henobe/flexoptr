@@ -1,4 +1,4 @@
-new_trades <- describe_trades(c(3,4,5,6), c(3,3,6,6), c(20, 30, 40, 50))
+new_trades <- describe_trades(c(3, 4, 5, 6), c(3, 3, 6, 6), c(20, 30, 40, 50))
 
 test_that("Old trades can be a Null-object", {
   new_trades$trading_time <- 0
@@ -18,7 +18,7 @@ test_that("Trading time equals offset", {
 })
 
 test_that("Standard values are handled correlty", {
-  old_trades <- describe_trades(c(2,5,5,6), c(3,3,6,6), c(10, 20, -5, 30))
+  old_trades <- describe_trades(c(2, 5, 5, 6), c(3, 3, 6, 6), c(10, 20, -5, 30))
   old_trades$trading_time <- 0
   complete_trades <- append_trades(new_trades, old_trades, 3)
 
@@ -31,5 +31,5 @@ test_that("Standard values are handled correlty", {
 
 test_that("Empty data frame returns unchanged old_trades", {
   new_trades$trading_time <- 0
-  expect_equal(append_trades(new_trades[0,], new_trades), new_trades)
+  expect_equal(append_trades(new_trades[0, ], new_trades), new_trades)
 })

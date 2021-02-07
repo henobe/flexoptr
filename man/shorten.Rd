@@ -7,7 +7,7 @@
 shorten(x, by)
 }
 \arguments{
-\item{x}{a vector}
+\item{x}{a vector.}
 
 \item{by}{an integer value, giving the non-negative number of elements that
 should be left out, counted from the end of the vector.}

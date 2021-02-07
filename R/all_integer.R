@@ -3,6 +3,8 @@
 #' @param x a vector
 #'
 #' @return a logical value
-all_integer <- function(x){
-  (all(sapply(x, function(x) x%%1 == 0)))
+#' @noRd
+all_integer <- function(x) {
+  sapply(x, function(x) x %% 1 == 0) %>%
+    all()
 }

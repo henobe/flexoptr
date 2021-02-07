@@ -7,7 +7,8 @@
 format_da_prices(prices)
 }
 \arguments{
-\item{prices}{a numerical vector of prices.}
+\item{prices}{a numerical vector of prices. Length must be a multiple of 24.
+Days with a change in daylight saving time can therefore not be handled.}
 }
 \value{
 a list

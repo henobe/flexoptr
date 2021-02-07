@@ -1,6 +1,6 @@
 test_that("Non-Integer parameters are blocked", {
-  expect_false(all_integer(c(3,4,5,6.4)))
-  expect_false(all_integer(c(3.3,4.3,5.3,6.4)))
+  expect_false(all_integer(c(3, 4, 5, 6.4)))
+  expect_false(all_integer(c(3.3, 4.3, 5.3, 6.4)))
 })
 
 test_that("Named vector computes normally", {

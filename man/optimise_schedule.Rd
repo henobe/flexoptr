@@ -11,25 +11,39 @@ optimise_schedule(schedule, prices, parameters, shift, blocked = NULL)
 
 \item{prices}{a list of available prices. When an element consists only of
 NA-values (or a single), then that hour will not be iterated. When some price
-values inside a list element are NA, this will be interpreted that only
-those hours are not tradeable.}
+values inside a list element are NA, this will be interpreted to mean that
+only those hours are not tradeable.}
 
 \item{parameters}{a named vector of integers, including values for
 charge_rate, loss_rate, starting_state, and capacity.}
 
 \item{shift}{an integer, indicates the difference to the the sum of the
-\code{current_schedule} that is added or subtracted each iteration}
+\code{current_schedule} that is added or subtracted each iteration.}
 
 \item{blocked}{A logical vector indicating whether the schedule for that
 hour should be kept as is and not changed by the optimisation, same length
-as schedule}
+as schedule.}
 }
 \value{
 A list with three elements, an optimised schedule, the states of the
 storage according to that new schedule and a data frame of corresponding trades.
 }
 \description{
-Optimise a schedule with an iterating approach
+The optimal possible schedule considering a set of prices a pre-existing 
+schedule and physical constraints of a storage is calculated.
+}
+\details{
+A current schedule is taken, the corresponding constraints are generated and
+then the optimal schedule in these constraints is calculated. The necessary
+trades are then recorded. This procedure is repeated as coded in the prices
+parameter.
+
+The approach allows for overlapping optimisations, where the result of the
+previous run influences the outcome of the next - as is the case during a
+typical intra day optimisation.
+
+Non-overlapping time frames are also handled, as is the case during a day
+ahead process where the shift represents the energy loss over 24 hours.
 }
 \seealso{
 \code{\link{build_constraints}}

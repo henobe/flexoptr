@@ -14,25 +14,26 @@ simulate_marketing(
 )
 }
 \arguments{
-\item{parameters}{A named vector of parameters}
+\item{parameters}{A named vector of parameters.}
 
-\item{da_prices}{A vector of day ahead prices, must be a multiple of 24}
+\item{da_prices}{A vector of day ahead prices, must be a multiple of 24.}
 
 \item{id_prices}{A data frame of intra day prices, different columns describe
 different indexes.}
 
-\item{id_index_names}{A vector of strings describing the order of columns 
-for consecutive hours.}
+\item{id_index_names}{A vector of strings describing the order of columns
+for consecutive hours as encoded in the parameter \code{id_prices}.}
 
-\item{blocked_per_day}{An optional vector of 24 integers describing which the
+\item{blocked_per_day}{An optional vector of 24 integers describing the
 power that is predetermined for certain hours and cannot be optimised.}
 
 \item{simplify}{Whether the output should be a simple data frame
 describing the revenues or a more complex list with the whole trade logs,
-schedule and state}
+schedule and state.}
 }
 \value{
-A list of results for each of the three scenarios
+A list of results for each of the three scenarios or a data frame
+with the respective revenues.
 }
 \description{
 A single set of parameters, day ahead prices and intra day prices are used

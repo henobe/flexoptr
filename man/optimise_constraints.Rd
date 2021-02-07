@@ -18,7 +18,7 @@ of constraints.}
 should be distributed over the possible times.}
 }
 \value{
-A vector of integers
+A vector of integers representing the optimal schedule
 }
 \description{
 The order of the data frame and the price data is assumed to represent

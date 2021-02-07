@@ -7,7 +7,7 @@
 match_constraints(constraints, fixed_schedule, untradeable = NULL)
 }
 \arguments{
-\item{constraints}{A data.frame with constraints}
+\item{constraints}{A data.frame with constraints.}
 
 \item{fixed_schedule}{A numeric vector describing which amounts should be
 applied to schedule. It is implicitly assumed that these values do not

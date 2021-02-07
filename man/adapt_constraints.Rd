@@ -7,13 +7,16 @@
 adapt_constraints(constraints, index)
 }
 \arguments{
-\item{constraints}{a data frame}
+\item{constraints}{a data frame of constraints, expected to resemble output
+of \code{build_constraints}.}
 
-\item{index}{a positive integer, the index where a unit of charge is added}
+\item{index}{a positive integer, the index where a unit of charge is added.}
 }
 \value{
-a data frame, updated constraints input
+the constraints data frame with updated values
 }
 \description{
-Adapt constraints to a charge input
+Constraints built with \code{build_constraints} to incorporate the changes
+when a charge is added at an index. The values in the columns \code{cummax},
+\code{cummin} and \code{dirmax} are updated accordingly.
 }

@@ -5,19 +5,24 @@
 #' @param loss_rate a positive integer
 #'
 #' @return a vector of integers, with length \code{cycles}.
-calc_cummin <- function(cycles, state, loss_rate){
+#' @noRd
+calc_cummin <- function(cycles, state, loss_rate) {
   cycles_until_empty <- state / loss_rate
 
-  if(floor(cycles_until_empty) < cycles) {
-    if(state == 0){
+  if (floor(cycles_until_empty) < cycles) {
+    if (state == 0) {
       return(cumsum(rep(loss_rate, cycles)))
     } else {
       overshoot <- ceiling(cycles_until_empty) * loss_rate - state
 
-      return(c(rep(0, ceiling(cycles_until_empty) - 1),
-               overshoot,
-               overshoot + cumsum(rep(loss_rate,
-                                      cycles - (ceiling(cycles_until_empty))))))
+      return(c(
+        rep(0, ceiling(cycles_until_empty) - 1),
+        overshoot,
+        overshoot + cumsum(rep(
+          loss_rate,
+          cycles - (ceiling(cycles_until_empty))
+        ))
+      ))
     }
   } else {
     rep(0, cycles)
@@ -34,7 +39,8 @@ calc_cummin <- function(cycles, state, loss_rate){
 #' @param charge_rate a positive integer
 #'
 #' @return a vector of integers, with length \code{cycles}.
-calc_cummax <- function(cycles, state, capacity, loss_rate, charge_rate){
+#' @noRd
+calc_cummax <- function(cycles, state, capacity, loss_rate, charge_rate) {
   charge_cycles <- (capacity - state) / (charge_rate - loss_rate)
   full_charge_cycles <- floor(charge_cycles)
   remaining_charge <- capacity + ceiling(charge_cycles) * loss_rate -
@@ -42,12 +48,14 @@ calc_cummax <- function(cycles, state, capacity, loss_rate, charge_rate){
 
   charge_until_full <- full_charge_cycles * charge_rate + remaining_charge
 
-  if(charge_cycles > cycles) {
+  if (charge_cycles > cycles) {
     return(rep(charge_until_full, cycles))
   } else {
     following_charge <- cumsum(rep(loss_rate, cycles - ceiling(charge_cycles)))
-    return(c(rep(charge_until_full, ceiling(charge_cycles)),
-             charge_until_full + following_charge))
+    return(c(
+      rep(charge_until_full, ceiling(charge_cycles)),
+      charge_until_full + following_charge
+    ))
   }
 }
 
@@ -83,26 +91,29 @@ calc_cummax <- function(cycles, state, capacity, loss_rate, charge_rate){
 #' @examples
 #' build_constraints(10, 5, 20, 2, 4)
 build_constraints <- function(cycles, state, capacity, loss_rate,
-                              charge_rate, parameters = NULL){
-  if(!is.null(parameters)){
+                              charge_rate, parameters = NULL) {
+  if (!is.null(parameters)) {
     capacity <- unname(parameters["capacity"])
     loss_rate <- unname(parameters["loss_rate"])
     charge_rate <- unname(parameters["charge_rate"])
 
-    if(any(sapply(c(capacity, loss_rate, charge_rate), is.na))){
+    if (any(sapply(c(capacity, loss_rate, charge_rate), is.na))) {
       stop("Argument base_parameters was used, but the vector did not include
            all necessary elements (capacity, loss_rate, charge_rate).")
     }
   }
-  if(any(c(cycles, state, capacity, loss_rate, charge_rate) < 0)){
+  if (any(c(cycles, state, capacity, loss_rate, charge_rate) < 0)) {
     ind <- which(c(cycles, state, capacity, loss_rate, charge_rate) < 0)
-    stop(paste("Negative parameter",
-               c("cycles", "state", "capacity", "loss_rate", "charge_rate")[ind],
-               "must be zero or positive."))
+    stop(paste(
+      "Negative parameter",
+      c("cycles", "state", "capacity", "loss_rate", "charge_rate")[ind],
+      "must be zero or positive."
+    ))
   }
-  
+
   data.frame(
     "cummin" = calc_cummin(cycles, state, loss_rate),
     "cummax" = calc_cummax(cycles, state, capacity, loss_rate, charge_rate),
-    "dirmax" = charge_rate)
+    "dirmax" = charge_rate
+  )
 }

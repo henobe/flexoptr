@@ -7,9 +7,9 @@
 split_schedule(schedule, reservations, available_prices)
 }
 \arguments{
-\item{schedule}{A numeric vector of the current schedule}
+\item{schedule}{A numeric vector of the current schedule.}
 
-\item{reservations}{A numeric vector describing reserved amounts of power}
+\item{reservations}{A numeric vector describing reserved amounts of power.}
 
 \item{available_prices}{A numeric vector. When an element is NA, this
 element is considered to be untradeable, therefore the schedule is taken as

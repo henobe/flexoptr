@@ -34,10 +34,12 @@ time for the next hours. The current hour is assumed to be untradeable and
 therefore an NA is inserted for that time.
 }
 \examples{
-some_prices <- data.frame(time = c(1,2,3),
-                          id_1 = c(20, 30, 40),
-                          id_2 = c(22,28, 39),
-                          id_3 = c(25, 27, 41))
+some_prices <- data.frame(
+  time = c(1, 2, 3),
+  id_1 = c(20, 30, 40),
+  id_2 = c(22, 28, 39),
+  id_3 = c(25, 27, 41)
+)
 format_id_prices(some_prices, c("id_1", "id_2", "id_3"))
 }
 \seealso{
