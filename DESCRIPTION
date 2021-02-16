@@ -4,10 +4,11 @@ Title: Optimise Energy Flexibilities
 Version: 0.5
 Author: Hendrik Obelöer
 Maintainer: <hendrik.obeloeer@haw-hamburg.de>
-Description: A suite of functions to generalise and ease the modelling of 
-    energy flexibilities. By defining base paramters, the needs of a
-    constrained flexiblity are calculated, and optimised over price data.
-    Further analysis, including balancing costs, is facilitated.
+Description: The goal of flexoptr is to provide a suite of functions to 
+    generalise and ease the modelling of energy flexibilities. By defining base
+    parameters, the needs of a constrained flexibility are calculated, and
+    optimised over price data. Several functions to facilitate the optimisation
+    of more complex market and configuration analyses are also provided.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
