@@ -14,26 +14,30 @@ build_constraints(
 )
 }
 \arguments{
-\item{cycles}{a positive integer, the number of cycles this function should consider}
+\item{cycles}{a positive integer, the number of cycles this function should
+consider}
 
 \item{state}{a positive integer, the starting state of energy in the storage}
 
-\item{capacity}{a positive integer, the maximum amount of energy that can be stored}
+\item{capacity}{a positive integer, the maximum amount of energy that can be
+stored}
 
 \item{loss_rate}{a positive integer, the energy / cycle depleted from storage}
 
 \item{charge_rate}{a positive integer, the maximum energy / cycle which with
 the storage can be charged}
 
-\item{parameters}{a numerical vector, the elements must at least include
-capacity, loss_rate and charge_rate coded as names}
+\item{parameters}{a numerical, named vector, can substitute the use of the
+parameters \code{capacity}, \code{loss_rate}, and \code{charge_rate}. When
+used, all three values must be supplied by named values.}
 }
 \value{
-a data frame with cycle number, minimum, and maximum cumulative charge
+a data frame with cycle number, minimum, and maximum cumulative
+  charge
 }
 \description{
-Given the physical parameters, this function calculates the necessary,
-i.e lower limits, and possible, i.e. upper limits, for charging a storage.
+Given the physical parameters, this function calculates the necessary, i.e
+lower limits, and possible, i.e. upper limits, for charging a storage.
 }
 \details{
 Considering a steady loss rate in some kind of energy storage, this function
@@ -44,8 +48,8 @@ In the same sense, a maximum cumulative charge is calculated which indicates
 the physical and realistic maximum of energy that could be put into the
 storage until it is full.
 
-The function thinks in time cycles, where one would charge x amount of
-energy from the beginning of the cycle until the end of the same cycle.
+The function thinks in time cycles, where one would charge x amount of energy
+from the beginning of the cycle until the end of the same cycle.
 }
 \examples{
 build_constraints(10, 5, 20, 2, 4)

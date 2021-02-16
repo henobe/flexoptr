@@ -62,8 +62,8 @@ calc_cummax <- function(cycles, state, capacity, loss_rate, charge_rate) {
 
 #' Calculate the cumulative minimum and maximum charge for a storage
 #'
-#' Given the physical parameters, this function calculates the necessary,
-#' i.e lower limits, and possible, i.e. upper limits, for charging a storage.
+#' Given the physical parameters, this function calculates the necessary, i.e
+#' lower limits, and possible, i.e. upper limits, for charging a storage.
 #'
 #' Considering a steady loss rate in some kind of energy storage, this function
 #' calculates the cumulative minimal charge required to not go below zero
@@ -73,19 +73,23 @@ calc_cummax <- function(cycles, state, capacity, loss_rate, charge_rate) {
 #' the physical and realistic maximum of energy that could be put into the
 #' storage until it is full.
 #'
-#' The function thinks in time cycles, where one would charge x amount of
-#' energy from the beginning of the cycle until the end of the same cycle.
+#' The function thinks in time cycles, where one would charge x amount of energy
+#' from the beginning of the cycle until the end of the same cycle.
 #'
-#' @param cycles a positive integer, the number of cycles this function should consider
+#' @param cycles a positive integer, the number of cycles this function should
+#'   consider
 #' @param state a positive integer, the starting state of energy in the storage
-#' @param capacity a positive integer, the maximum amount of energy that can be stored
+#' @param capacity a positive integer, the maximum amount of energy that can be
+#'   stored
 #' @param loss_rate a positive integer, the energy / cycle depleted from storage
 #' @param charge_rate a positive integer, the maximum energy / cycle which with
-#' the storage can be charged
-#' @param parameters a numerical vector, the elements must at least include
-#' capacity, loss_rate and charge_rate coded as names
+#'   the storage can be charged
+#' @param parameters a numerical, named vector, can substitute the use of the
+#'   parameters \code{capacity}, \code{loss_rate}, and \code{charge_rate}. When
+#'   used, all three values must be supplied by named values.
 #'
-#' @return a data frame with cycle number, minimum, and maximum cumulative charge
+#' @return a data frame with cycle number, minimum, and maximum cumulative
+#'   charge
 #' @export
 #'
 #' @examples
@@ -97,7 +101,10 @@ build_constraints <- function(cycles, state, capacity, loss_rate,
     loss_rate <- unname(parameters["loss_rate"])
     charge_rate <- unname(parameters["charge_rate"])
 
-    if (any(sapply(c(capacity, loss_rate, charge_rate), is.na))) {
+    if (any(sapply(
+      c(capacity, loss_rate, charge_rate, cycles, state),
+      is.na)
+    )) {
       stop("Argument base_parameters was used, but the vector did not include
            all necessary elements (capacity, loss_rate, charge_rate).")
     }

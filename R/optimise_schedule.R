@@ -36,7 +36,7 @@
 optimise_schedule <- function(schedule, prices, parameters, shift, blocked = NULL) {
   if (any(sapply(
     c("starting_state", "charge_rate", "loss_rate", "capacity"),
-    function(x) is.null(parameters[x])
+    function(x) is.na(parameters[x])
   ))) {
     stop("All parameter elements must be present.")
   }
